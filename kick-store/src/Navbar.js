@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from './contexts/context';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -13,9 +14,9 @@ const Navbar = () => {
         <nav className="navbar">
             <h1>Kick Store</h1>
             <div className="links">
-                <a href="/">Kicks</a>
-                <a href="/cart">Cart</a>
-                <a href="/perfil">Perfil</a>
+                <Link to="/">Kicks</Link>
+                <Link to="/cart">Cart</Link>
+                <Link to="/perfil">Perfil</Link>
                 <button className="LogoutBtn" onClick={() => {
                     singOut()
                 }}>Logout</button>

@@ -29,7 +29,7 @@ const AppRoutes = () => {
         <Router>
             <AppProvider>
                 <Routes>
-                    <Route exact path='/' element={<Private><App/></Private>}/>
+                    <Route exact path='*' element={<Private><App/></Private>}/>
                     <Route exact path='/login' element={<Login/>}/>
                     <Route exact path='/register' element={<Register/>}/>
                 </Routes>

@@ -1,32 +1,44 @@
-import { useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import CartPopup from "./CartPopup";
 import { AppContext } from "./contexts/context";
 
 const Home = () => {
 
-    const { prods, products } = useContext(AppContext);
-    const getProds = () => {
+    const { prods, products, cart } = useContext(AppContext);
+    const [ selectedProd, setSelectedProd ] = useState(null);
+    const [ showModal, setShowModal ] = useState(false);
+
+    useEffect(() => {
         products();
-        console.log(prods);
+    }, []);
+
+    const openModal = (prod) => {
+        setSelectedProd(prod);
+        setShowModal(prev => !prev);
+        console.log(cart);
     };
 
-
     return (
-        <div onLoad={getProds} className="Home">
-            <div className="kicks">
-                <h2>Kicks</h2>
+        <>
+            { showModal && <CartPopup item={selectedProd} closeModal={setShowModal}/> }
+            <div className="content">
+                <div className="listing">
+                    {prods != null
+                        ? prods.map((prod) => (
+                            <div onClick={() => openModal(prod)} className="kick-preview" key={prod.product_id}>
+                                <h3>{prod.product_name}</h3>
+                                <p>brand: {prod.product_brand}</p>
+                                <p>{prod.product_price} $</p>
+                                <p>{prod.product_stock} unit.</p>
+                            </div>
+                        )) : <h2>Loading...</h2>
+                    }
+                </div>
+                <div>
+                    <button>Add kick</button>
+                </div>
             </div>
-            <div className="listing">
-                {/* {prods.map((prod) => (
-                    <div className="kick-preview" key={prod.id}>
-                        <h2>{prod.name}</h2>
-                        <p>{prod.description}</p>
-                    </div>
-                ))} */}
-            </div>
-            <div className="pageBar">
-                <button>1</button>
-            </div>
-        </div>
+        </>
      );
 }
 

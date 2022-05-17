@@ -98,7 +98,7 @@
   box-sizing: border-box;
   display: block;
 }
-.login button {
+button {
   background: #f1356d;
   color: #fff;
   margin: 10px 0;
@@ -106,4 +106,102 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+}
+
+/* kicks preview */
+.kick-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  flex: 1;
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+.kick-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+.kick-preview h2, h3 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+
+/* perfil preview */
+.perfil {
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.perfil h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 30px;
+}
+.perfil p {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 18px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: block;
+}
+.perfil label {
+  font-size: 15px;
+  margin-inline-end: 15px;
+  margin-inline-start: 5px;
+  padding-inline-end: 10px;
+}
+.perfil input {
+  align-items: center;
+}
+
+/* kicks modal */
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalContainer {
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+.modalContainer p {
+  font-size: 30px;
+  display: inline-block;
+  text-align: center;
+}
+.modalContainer .footer .body {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer button {
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 6px;
+  color: white;
+  justify-content: flex-end;
+  background-color: #f1356d;
+  border-radius: 5px;
+}
+#addToCartBtn {
+  background-color: cornflowerblue;
 }
