@@ -38,7 +38,7 @@ const Login = () => {
                             onChange={onChange}
                         />
                     ))}
-                    <button onClick={submit}>Login</button>
+                    <button type='submit' onClick={submit}>Login</button>
                     <a href='/register'>Create an account</a>
                 </form>
             </div>

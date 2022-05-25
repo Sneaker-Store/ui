@@ -4,7 +4,6 @@ import { AppContext } from "./contexts/context";
 function CartPopup({ item, closeModal }) {
 
     const { addToCart } = useContext(AppContext);
-
     const modalRef = useRef();
 
     const close = e => {

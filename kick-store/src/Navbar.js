@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
-    const { logout } = useContext(AppContext);
+    const { logout, cart } = useContext(AppContext);
 
     const singOut = () => {
         logout();
@@ -16,6 +16,7 @@ const Navbar = () => {
             <div className="links">
                 <Link to="/">Kicks</Link>
                 <Link to="/cart">Cart</Link>
+                {/* cart.length > 0 && <p>{cart.reduce((a, c) => a + c.qty, 0)}</p> */}
                 <Link to="/perfil">Perfil</Link>
                 <button className="LogoutBtn" onClick={() => {
                     singOut()

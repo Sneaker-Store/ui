@@ -9,6 +9,9 @@ export const products = axios.create({
 export const notify = axios.create({
     baseURL: "http://localhost:9000/v1"
 });
+export const payment = axios.create({
+    baseURL: "http://localhost:2700"
+});
 
 auth.interceptors.response.use((response) => {
     return response;
@@ -26,8 +29,14 @@ export const endSession = async (user) => {
     return auth.get('logout', {headers});
 }
 
-export const createAccount = async (username, email, password) => {
-    return auth.post('register', {username, email, password});
+export const createAccount = async (data) => {
+    const res = auth.post('register', {data}).catch((e) => {
+        return e.response;
+    });
+    // const res2 = notify.post('register', {data}).catch((e) => {
+    //     return e.response;
+    // });
+    return res;
 }
 
 export const getProducts = async (token) => {
@@ -38,9 +47,33 @@ export const getProducts = async (token) => {
     return res;
 }
 
-export const addShoe = async (token, shoe) => {
+export const addShoe = async (token, data) => {
     const headers = {'token': token.token, 'email': token.email};
-    const res = products.get('add', {headers}, shoe).catch((e) => {
+    const res = products.post('products', {headers}, {data}).catch((e) => {
+        return e.response;
+    });
+    return res;
+}
+
+export const getNotification = async (user, token) => {
+    const headers = {'token': token.token, 'email': token.email};
+    const res = notify.get('user/', {headers}, {params: { 'username': user.username}}).catch((e) => {
+        return e.response;
+    });
+    return res;
+}
+
+export const setNotification = async (user, token, val) => {
+    const headers = {'token': token.token, 'email': token.email};
+    const res = notify.put('user/', {headers}, {params: { 'username': user.username}}, val).catch((e) => {
+        return e.response;
+    });
+    return res;
+}
+
+export const pay = async (token, products) => {
+    const headers = {'token': token.token, 'email': token.email};
+    const res = payment.post('payments', {headers}, products).catch((e) => {
         return e.response;
     });
     return res;
