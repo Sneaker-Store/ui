@@ -31,11 +31,11 @@ const Home = () => {
                 <div className="listing">
                     {prods != null
                         ? prods.map((prod) => (
-                            <div onClick={() => openModal(prod)} className="kick-preview" key={prod.product_id}>
-                                <h3>{prod.product_name}</h3>
-                                <p>Brand: {prod.product_brand}</p>
-                                <p>{prod.product_price} $</p>
-                                <p>Stock: {prod.product_stock} unit.</p>
+                            <div onClick={() => openModal(prod)} className="kick-preview" key={prod.id}>
+                                <h3>{prod.name}</h3>
+                                <p>Brand: {prod.brand}</p>
+                                <p>{prod.price} $</p>
+                                <p>Stock: {prod.stock} unit.</p>
                             </div>
                         )) : <h2>Loading...</h2>
                     }

@@ -7,10 +7,10 @@ export default function KickPopup({ closeModal }) {
     const { addProd } = useContext(AppContext);
 
     const [data, setData] = useState({
-        name: "",
         brand: "",
-        price: 0,
-        stock: 0
+        name: "",
+        stock: 0,
+        price: 0
     });
 
     const inputs = [
@@ -38,6 +38,7 @@ export default function KickPopup({ closeModal }) {
     const add = () => {
         console.log(data);
         addProd(data);
+        closeModal(false);
     }
 
     return (
