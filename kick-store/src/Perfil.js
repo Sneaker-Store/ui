@@ -7,7 +7,7 @@ const Perfil = () => {
     const [not, setNot] = useState({'email': true, 'phone': false});
 
     useEffect(() => {
-        //setNot(getNotify());
+        //setNot(getNotify())
     }, []);
 
     const handleCheck = (type) => {

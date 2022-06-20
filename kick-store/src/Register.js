@@ -16,7 +16,7 @@ const Register = () => {
         sms: false,
     });
     const inputs = [
-        {id: 0, name: 'username', value: data.email, placeholder: 'Username', type: 'text', required: true, label: 'Username',
+        {id: 0, name: 'username', value: data.username, placeholder: 'Username', type: 'text', required: true, label: 'Username',
         errorMsg: 'Username must be at least 3 characters'},
         {id: 1, name: 'email', value: data.email, placeholder: 'Email', type: 'email', required: true, label: 'Email',
         errorMsg: 'Email is required and must be valid!'},
@@ -25,7 +25,7 @@ const Register = () => {
         {id: 3, name: 'repPassword', value: data.repPassword, placeholder: 'Password', type: 'password', required: true, pattern: data.password,
         label: 'Confirm Password', errorMsg: 'Passwords don\'t match!'},
         {id: 4, name: 'phone', value: data.phone, placeholder: 'Phone', type: 'decimal', required: true, minLength: 9, maxLength: 9,
-        label: 'Confirm Password', errorMsg: 'Invalid phone number!'}
+        label: 'Phone Number', errorMsg: 'Invalid phone number!'}
     ]
     const onChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })

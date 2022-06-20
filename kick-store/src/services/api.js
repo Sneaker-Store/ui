@@ -71,9 +71,9 @@ export const setNotification = async (user, token, val) => {
     return res;
 }
 
-export const pay = async (token, products) => {
+export const pay = async (token, card, products) => {
     const headers = {'token': token.token, 'email': token.email};
-    const res = payment.post('payments', {headers}, products).catch((e) => {
+    const res = payment.post('payments', {headers}, card, products).catch((e) => {
         return e.response;
     });
     return res;

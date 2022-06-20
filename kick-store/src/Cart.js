@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AppContext } from './contexts/context';
 import PaymentPopup from './PaymentPopup';
 
 const Cart = () => {
 
     const { cart, addToCart, removeFromCart, checkout } = useContext(AppContext);
-    const [ itemsPrice, setItemsPrice ] = useState(cart.reduce((a, c) => a + c.product_price * c.qty, 0));
+    const [ itemsPrice, setItemsPrice ] = useState(cart.reduce((a, c) => a + c.price * c.qty, 0));
     const [ showModal, setShowModal ] = useState(false);
 
     const setFinalPrice = (item, flag) => {
@@ -14,15 +14,22 @@ const Cart = () => {
         } else {
             addToCart(item);
         }
-        setItemsPrice(cart.reduce((a, c) => a + c.product_price * c.qty, 0));
+        setItemsPrice(cart.reduce((a, c) => a + c.price * c.qty, 0));
     }
 
-    // const openModal = () => {
-    //     setShowModal(prev => !prev);
-    // };
+    useEffect(() => {
+        console.log(cart);
+    }, [])
+
+    const openModal = () => {
+        setShowModal(prev => !prev);
+    };
 
     const payment = () => {
-        checkout({'products': cart, 'ammount': itemsPrice});
+        if(cart.length > 0) {
+            openModal()
+            //checkout({'products': cart, 'ammount': itemsPrice});
+        }
     }
 
     return (
@@ -33,8 +40,8 @@ const Cart = () => {
                     {cart !== []
                         ? cart.map((item, index) => (
                             <div className="kick-preview" key={index}>
-                                <h3>{item.product_name}</h3>
-                                <div><p>{item.qty} x {item.product_price.toFixed(2)} $</p></div>
+                                <h3>{item.name}</h3>
+                                <div><p>{item.qty} x {item.price.toFixed(2)} $</p></div>
                                 <div>
                                     <button onClick={() => setFinalPrice(item, false)}>+</button>
                                     <button onClick={() => setFinalPrice(item, true)}>-</button>

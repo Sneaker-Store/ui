@@ -22,10 +22,8 @@ export const AppProvider = ({children}) => {
 
     useEffect(() => {
         const recoveredUSer = localStorage.getItem("user");
-        const recoveredCart = localStorage.getItem("cart");
-        if(recoveredUSer && recoveredCart){
+        if(recoveredUSer){
             setUser(JSON.parse(recoveredUSer));
-            setCart(JSON.parse(recoveredCart));
         }
         setLoading(false);
     }, []);
@@ -60,6 +58,7 @@ export const AppProvider = ({children}) => {
         localStorage.removeItem("user");
         localStorage.removeItem("cart");
         setUser(null);
+        setCart([]);
         navigate("/");
     };
     const auth = (val) => {
@@ -117,12 +116,16 @@ export const AppProvider = ({children}) => {
                 )
             );
         }
+        console.log(cart);
+    };
+    const clearCart = () => {
+        setCart([]);
     };
 
-    const checkout = async (products) => {
-        products['username'] = user['user']['username'];
+    const checkout = async (card, products) => {
+        console.log(card);
         console.log(products);
-        const res = await pay(user['token'], products);
+        const res = await pay(user['token'], card, products);
         if(res.status===200) {
             setCart([]);
             navigate("/");
@@ -146,6 +149,7 @@ export const AppProvider = ({children}) => {
                                     setNotify,
                                     addToCart,
                                     removeFromCart,
+                                    clearCart,
                                     checkout
             }}
         >

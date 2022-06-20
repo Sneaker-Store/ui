@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
-    const { logout, cart } = useContext(AppContext);
+    const { logout } = useContext(AppContext);
 
     const singOut = () => {
         logout();
