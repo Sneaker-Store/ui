@@ -73,6 +73,7 @@ export const AppProvider = ({children}) => {
 
     const products = async () => {
         const res = await getProducts(user['token']);
+        console.log(res.data)
         if(res.status===401) auth(0);
         if(res.status===200){
             setProds(res.data);

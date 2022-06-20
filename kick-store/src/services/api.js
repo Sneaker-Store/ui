@@ -49,7 +49,7 @@ export const getProducts = async (token) => {
 
 export const addShoe = async (token, data) => {
     const headers = {'token': token.token, 'email': token.email};
-    const res = products.post('products', {headers}, {data}).catch((e) => {
+    const res = products.post('products', data, headers).catch((e) => {
         return e.response;
     });
     return res;
