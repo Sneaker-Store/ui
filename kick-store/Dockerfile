@@ -9,7 +9,7 @@ COPY package-lock.json ./
 
 RUN npm install
 RUN npm install react-scripts@5.0.1 -g
-RUN npm audit fix --force
+#RUN npm audit fix --force
 
 COPY . ./
 
