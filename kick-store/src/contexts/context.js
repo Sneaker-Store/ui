@@ -91,12 +91,12 @@ export const AppProvider = ({children}) => {
     };
 
     const addToCart = (item) => {
-        //setCart(items => [...items, item]);
-        const exists = cart.find((x) => x.product_id === item.product_id);
+        setCart(items => [...items, item]);
+        const exists = cart.find((x) => x.id === item.id);
         if(exists) {
             setCart(
                 cart.map((x) =>
-                    x.product_id === item.product_id ? { ...exists, qty: exists.qty + 1} : x
+                    x.id === item.id ? { ...exists, qty: exists.qty + 1} : x
                 )
             );
         } else {
@@ -106,13 +106,13 @@ export const AppProvider = ({children}) => {
         console.log(cart);
     };
     const removeFromCart = (item) => {
-        const exists = cart.find((x) => x.product_id === item.product_id);
+        const exists = cart.find((x) => x.id === item.id);
         if(exists.qty === 1) {
-            setCart(cart.filter((x) => x.product_id !== item.product_id));
+            setCart(cart.filter((x) => x.id !== item.id));
         } else {
             setCart(
                 cart.map((x) =>
-                    x.product_id === item.product_id ? { ...exists, qty: exists.qty - 1} : x
+                    x.id === item.id ? { ...exists, qty: exists.qty - 1} : x
                 )
             );
         }
@@ -122,10 +122,9 @@ export const AppProvider = ({children}) => {
         setCart([]);
     };
 
-    const checkout = async (card, products) => {
-        console.log(card);
+    const checkout = async (products) => {
         console.log(products);
-        const res = await pay(user['token'], card, products);
+        const res = await pay(user['token'], products);
         if(res.status===200) {
             setCart([]);
             navigate("/");

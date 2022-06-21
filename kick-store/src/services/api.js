@@ -1,16 +1,19 @@
 import axios from "axios";
 
+
+
 export const auth = axios.create({
-    baseURL: "http://localhost:5000"
+    baseURL: "http://localhost:5000"  //process.env.REACT_APP_AUTH_BASE_URL
 });
 export const products = axios.create({
-    baseURL: "http://localhost:8080/v1"
+    baseURL: "http://localhost:8080/v1" //process.env.REACT_APP_PROD_BASE_URL
 });
 export const notify = axios.create({
-    baseURL: "http://localhost:9000/v1"
+    baseURL: "http://notify.k3s" //process.env.REACT_APP_NOT_BASE_URL
+    //baseURL: "http://localhost:9000/v1"
 });
 export const payment = axios.create({
-    baseURL: "http://localhost:2700"
+    baseURL: "http://localhost:2700" //process.env.REACT_APP_PAY_BASE_URL
 });
 
 auth.interceptors.response.use((response) => {
@@ -71,9 +74,8 @@ export const setNotification = async (user, token, val) => {
     return res;
 }
 
-export const pay = async (token, card, products) => {
-    const headers = {'token': token.token, 'email': token.email};
-    const res = payment.post('payments', {headers}, card, products).catch((e) => {
+export const pay = async (token, products) => {
+    const res = payment.post('payments', {'username': token.email, 'ammount': products['ammount']}).catch((e) => {
         return e.response;
     });
     return res;

@@ -4,7 +4,7 @@ import LoginForm from './LoginInput'
 
 export default function KickPopup({ closeModal }) {
 
-    const { addProd } = useContext(AppContext);
+    const { addProd, products } = useContext(AppContext);
 
     const [data, setData] = useState({
         brand: "",
@@ -38,6 +38,7 @@ export default function KickPopup({ closeModal }) {
     const add = () => {
         console.log(data);
         addProd(data);
+        products();
         closeModal(false);
     }
 

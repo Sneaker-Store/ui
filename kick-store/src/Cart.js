@@ -1,10 +1,10 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from './contexts/context';
 import PaymentPopup from './PaymentPopup';
 
 const Cart = () => {
 
-    const { cart, addToCart, removeFromCart, checkout } = useContext(AppContext);
+    const { cart, addToCart, removeFromCart } = useContext(AppContext);
     const [ itemsPrice, setItemsPrice ] = useState(cart.reduce((a, c) => a + c.price * c.qty, 0));
     const [ showModal, setShowModal ] = useState(false);
 
@@ -15,11 +15,8 @@ const Cart = () => {
             addToCart(item);
         }
         setItemsPrice(cart.reduce((a, c) => a + c.price * c.qty, 0));
+        console.log(cart)
     }
-
-    useEffect(() => {
-        console.log(cart);
-    }, [])
 
     const openModal = () => {
         setShowModal(prev => !prev);

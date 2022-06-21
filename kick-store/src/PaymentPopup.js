@@ -3,7 +3,7 @@ import { AppContext } from "./contexts/context";
 import LoginForm from "./LoginInput";
 import './card.css';
 
-const PaymentPopup = ( products, closeModal ) => {
+const PaymentPopup = ( {products, closeModal} ) => {
     const { checkout } = useContext(AppContext);
     const modalRef = useRef();
 
@@ -11,7 +11,7 @@ const PaymentPopup = ( products, closeModal ) => {
         name: "",
         number: "",
         mm: new Date().getMonth(),
-        yy: new Date().getFullYear().toString().substring(-2),
+        yy: new Date().getFullYear(),
         ccv: ""
     })
 
@@ -36,13 +36,14 @@ const PaymentPopup = ( products, closeModal ) => {
     };
     const submit = (e) => {
         e.preventDefault();
-        checkout(card, products);
+        checkout(products);
+        closeModal(false)
     };
 
     return ( 
         <div className="modalBackground" ref={modalRef} onClick={close}>
             <div className='modalContainer'>
-                <form className="form-signin" onSubmit={(e)=>submit(e)}>
+                <form className="form-signin" >
                         {inputs.map((input) => (
                             <LoginForm
                                 key={input.id}
@@ -51,7 +52,7 @@ const PaymentPopup = ( products, closeModal ) => {
                                 onChange={onChange}
                             />
                         ))}
-                    <input type="submit" value="submit" className="submit-btn"/>
+                    <input type="submit" value="submit" className="submit-btn" onClick={(e)=>submit(e)}/>
                 </form>
             </div>
         </div>
