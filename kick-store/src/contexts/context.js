@@ -6,7 +6,7 @@ import {
     endSession,
     getProducts,
     addShoe,
-    // getNotification,
+    getNotification,
     // setNotification,
     pay
 } from '../services/api';
@@ -84,11 +84,13 @@ export const AppProvider = ({children}) => {
     };
 
     const getNotify = async () => {
-        //const res = await getNotification(user['user'], user['token']);
+        const res = await getNotification(user['user'], user['token']);
+        console.log(res);
+        return res.data;
     };
-    const setNotify = async (val) => {
-        //const res = await setNotification(user['user'], user['token'], val);
-    };
+    // const setNotify = async (val) => {
+    //     //const res = await setNotification(user['user'], user['token'], val);
+    // };
 
     const addToCart = (item) => {
         setCart(items => [...items, item]);
@@ -145,7 +147,7 @@ export const AppProvider = ({children}) => {
                                     products,
                                     addProd,
                                     getNotify,
-                                    setNotify,
+                                    //setNotify,
                                     addToCart,
                                     removeFromCart,
                                     clearCart,

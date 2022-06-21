@@ -1,7 +1,6 @@
 import axios from "axios";
 
 
-
 export const auth = axios.create({
     baseURL: "http://localhost:5000"  //process.env.REACT_APP_AUTH_BASE_URL
 });
@@ -36,9 +35,9 @@ export const createAccount = async (data) => {
     const res = auth.post('register', {data}).catch((e) => {
         return e.response;
     });
-    // const res2 = notify.post('register', {data}).catch((e) => {
-    //     return e.response;
-    // });
+    notify.post('register', data).catch((e) => {
+        return e.response;
+    });
     return res;
 }
 
@@ -60,19 +59,19 @@ export const addShoe = async (token, data) => {
 
 export const getNotification = async (user, token) => {
     const headers = {'token': token.token, 'email': token.email};
-    const res = notify.get('user/', {headers}, {params: { 'username': user.username}}).catch((e) => {
+    const res = notify.get('user/'+user.username+'/service', headers).catch((e) => {
         return e.response;
     });
     return res;
 }
 
-export const setNotification = async (user, token, val) => {
-    const headers = {'token': token.token, 'email': token.email};
-    const res = notify.put('user/', {headers}, {params: { 'username': user.username}}, val).catch((e) => {
-        return e.response;
-    });
-    return res;
-}
+// export const setNotification = async (user, token, val) => {
+//     const headers = {'token': token.token, 'email': token.email};
+//     const res = notify.put('user/', {headers}, {params: { 'username': user.username}}, val).catch((e) => {
+//         return e.response;
+//     });
+//     return res;
+// }
 
 export const pay = async (token, products) => {
     const res = payment.post('payments', {'username': token.email, 'ammount': products['ammount']}).catch((e) => {

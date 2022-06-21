@@ -4,10 +4,11 @@ import { AppContext } from './contexts/context';
 const Perfil = () => {
 
     const { user, getNotify, setNotify } = useContext(AppContext);
-    const [not, setNot] = useState({'email': true, 'phone': false});
+    const [not, setNot] = useState({'email': false, 'phone': false});
 
     useEffect(() => {
-        //setNot(getNotify())
+        let nots = getNotify();
+        setNot({'email': nots['email']==='true' ? true : false, 'phone': nots['phone']==='true' ? true : false});
     }, []);
 
     const handleCheck = (type) => {
