@@ -1,18 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from './contexts/context';
 
 const Perfil = () => {
 
-    const { user, getNotify, setNotify } = useContext(AppContext);
-    const [not, setNot] = useState({'email': false, 'phone': false});
+    const { user, getNotify, nots } = useContext(AppContext);
 
     useEffect(() => {
-        let nots = getNotify();
-        setNot({'email': nots['email']==='true' ? true : false, 'phone': nots['phone']==='true' ? true : false});
+        getNotify();
     }, []);
 
     const handleCheck = (type) => {
-        setNotify();
         console.log(type);
     }
 
@@ -22,11 +19,11 @@ const Perfil = () => {
             <p>Email: {user['user']['email']}</p>
             <p>Notifications:</p>
             <label>
-                <input type="checkbox" onChange={() => handleCheck('email')} checked={not['email']}/>
+                <input type="checkbox" onChange={() => handleCheck('email')} checked={nots['email']}/>
                 Email
             </label>
             <label>
-                <input type="checkbox" onChange={() => handleCheck('phone')} checked={not['phone']}/>
+                <input type="checkbox" onChange={() => handleCheck('sms')} checked={nots['sms']}/>
                 Phone
             </label>
         </div>

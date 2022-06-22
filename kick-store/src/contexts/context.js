@@ -18,6 +18,7 @@ export const AppProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [cart, setCart] = useState([]);
     const [prods, setProds] = useState(null);
+    const [nots, setNots] = useState({'email': false, 'sms': false})
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -84,13 +85,11 @@ export const AppProvider = ({children}) => {
     };
 
     const getNotify = async () => {
-        const res = await getNotification(user['user'], user['token']);
-        console.log(res);
-        return res.data;
+        const res = await getNotification(user['user'], user['token'])
+        if(res.status===200){
+            setNots(res.data)
+        }
     };
-    // const setNotify = async (val) => {
-    //     //const res = await setNotification(user['user'], user['token'], val);
-    // };
 
     const addToCart = (item) => {
         setCart(items => [...items, item]);
@@ -140,6 +139,7 @@ export const AppProvider = ({children}) => {
                                     loading,
                                     prods,
                                     cart,
+                                    nots,
                                     login,
                                     register,
                                     logout,

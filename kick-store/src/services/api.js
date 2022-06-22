@@ -12,7 +12,7 @@ export const notify = axios.create({
     //baseURL: "http://localhost:9000/v1"
 });
 export const payment = axios.create({
-    baseURL: "http://localhost:2700" //process.env.REACT_APP_PAY_BASE_URL
+    baseURL: "http://payment.k3s" //process.env.REACT_APP_PAY_BASE_URL
 });
 
 auth.interceptors.response.use((response) => {
@@ -61,7 +61,7 @@ export const getNotification = async (user, token) => {
     const headers = {'token': token.token, 'email': token.email};
     const res = notify.get('user/'+user.username+'/service', headers).catch((e) => {
         return e.response;
-    });
+    })
     return res;
 }
 
