@@ -2,10 +2,10 @@ import axios from "axios";
 
 
 export const auth = axios.create({
-    baseURL: "http://localhost:5000"  //process.env.REACT_APP_AUTH_BASE_URL
+    baseURL: "http://auth.k3s"  //process.env.REACT_APP_AUTH_BASE_URL
 });
 export const products = axios.create({
-    baseURL: "http://localhost:8080/v1" //process.env.REACT_APP_PROD_BASE_URL
+    baseURL: "http://product.k3s" //process.env.REACT_APP_PROD_BASE_URL
 });
 export const notify = axios.create({
     baseURL: "http://notify.k3s" //process.env.REACT_APP_NOT_BASE_URL

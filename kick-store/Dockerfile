@@ -1,18 +1,17 @@
-FROM node:16.15.0-alpine
+FROM node:alpine
 
-WORKDIR /app
+WORKDIR /usr/src/ui-app
 
-ENV PATH /app/node_modules/.bin:$PATH
+COPY package*.json /usr/src/ui-app/
 
-COPY package.json ./
-COPY package-lock.json ./
+#RUN npm install -g npm@8.12.1
 
 RUN npm install
-RUN npm install react-scripts@5.0.1 -g
-#RUN npm audit fix --force
 
-COPY . ./
+RUN npm install cors 
+
+COPY . /usr/src/ui-app
 
 EXPOSE 3000
 
-CMD ["npm, "start"]
+CMD ["npm", "start"]
